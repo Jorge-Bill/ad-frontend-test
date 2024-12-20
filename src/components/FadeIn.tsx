@@ -3,7 +3,12 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-export default function FadeIn({ children, delay = 0 }) {
+type FadeInProps = {
+  children: React.ReactNode;
+  delay?: number;
+};
+
+export default function FadeIn({ children, delay = 0 }: FadeInProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
