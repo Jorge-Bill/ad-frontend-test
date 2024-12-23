@@ -4,12 +4,9 @@ import Image from 'next/image';
 export default function Footer() {
   return (
     <footer className="bg-secondary">
-      <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-center lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-center lg:px-10">
         <div className="align-center flex justify-center">
-          <Link
-            href={'/'}
-            className="text-gray-400 hover:text-gray-300"
-          >
+          <Link href={'/'} className="text-gray-400 hover:text-gray-300">
             <span className="sr-only">Home</span>
             <Image
               src="/apply.svg"

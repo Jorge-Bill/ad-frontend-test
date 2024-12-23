@@ -18,7 +18,10 @@ export default function Header() {
         />
       </Link>
       <div className="hidden sm:flex sm:items-center sm:space-x-8">
-        <Link href="/cart" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
+        <Link
+          href="/cart"
+          className="-m-2 p-2 text-gray-400 hover:text-gray-500"
+        >
           <span className="sr-only">Cart</span>
           <ShoppingCartIcon aria-hidden="true" className="size-6" />
         </Link>

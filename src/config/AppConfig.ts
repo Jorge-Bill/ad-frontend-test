@@ -1,5 +1,5 @@
 export const AppConfig = {
-  site_name: 'TApply Digital Test',
+  site_name: 'Apply Digital Test',
   title: 'Apply Digital Test',
   description: 'Frontend development test for Apply Digital',
   locale: 'en',

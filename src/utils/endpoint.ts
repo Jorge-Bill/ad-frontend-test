@@ -1,6 +1,5 @@
 import { Game } from '@/types/game';
 
-
 // Mock games data
 export const allGames: Game[] = [
   {
