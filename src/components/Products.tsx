@@ -46,7 +46,7 @@ export default function Products() {
       });
   };
 
-  useInfiniteScroll(onLoad, isPending);
+  useInfiniteScroll(onLoad, isPending || isLoading);
 
   return (
     <>
@@ -61,7 +61,7 @@ export default function Products() {
           ))}
         </div>
         {!hasMore && !isPending && page > 1 && (
-          <p className="text-capitalize mt-2 text-center leading-6">
+          <p className="text-capitalize mt-4 text-center italic leading-6">
             No more games available.
           </p>
         )}
