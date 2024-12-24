@@ -7,7 +7,6 @@ export default function handler(
   res: NextApiResponse<Game[]>
 ) {
   const { genre } = req.query;
-
   if (genre) {
     return res
       .status(200)

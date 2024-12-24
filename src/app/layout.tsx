@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import FadeIn from '@/components/FadeIn';
 
 import { AppConfig } from '@/config/AppConfig';
 
@@ -25,13 +24,9 @@ export default function RootLayout({
     <html lang={AppConfig.locale}>
       <body className={inter.className}>
         <main className="mx-auto bg-white">
-          <FadeIn delay={0}>
-            <Header />
-          </FadeIn>
-          <FadeIn delay={0.4}>{children}</FadeIn>
-          <FadeIn delay={0.2}>
-            <Footer />
-          </FadeIn>
+          <Header />
+          {children}
+          <Footer />
         </main>
       </body>
     </html>

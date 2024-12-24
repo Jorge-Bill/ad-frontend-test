@@ -7,3 +7,8 @@ export interface Game {
   price: number;
   isNew: boolean;
 }
+
+export interface Genre {
+  id: string;
+  name: string;
+}

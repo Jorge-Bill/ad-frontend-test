@@ -9,12 +9,18 @@ type CardProps = {
 
 export default function Card({ game, onClick }: CardProps) {
   const memoizedGame = useMemo(() => game, [game]);
+  const { isNew, genre, image, name, price } = memoizedGame;
   return (
     <>
-      <div className="2s group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow transition-all">
+      <div className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow transition-all duration-200">
+        {isNew && (
+          <span className="text-xs absolute left-2 top-2 z-10 inline-flex transform items-center rounded-md bg-gray-100 px-1.5 py-0.5 font-medium text-gray-600 opacity-10 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
+            New
+          </span>
+        )}
         <Image
-          alt={memoizedGame.name}
-          src={memoizedGame.image}
+          alt={name}
+          src={image}
           width={382}
           height={384}
           className="aspect-[3/4] w-full bg-gray-200 object-cover group-hover:opacity-75 sm:aspect-auto sm:h-96"
@@ -22,16 +28,12 @@ export default function Card({ game, onClick }: CardProps) {
         />
         <div className="flex flex-1 flex-col space-y-2 p-4">
           <div className="flex flex-1 flex-col justify-end">
-            <p className="text-sm uppercase text-gray-500">
-              {memoizedGame.genre}
-            </p>
+            <p className="text-sm uppercase text-gray-500">{genre}</p>
             <div className="flex justify-between">
               <h3 className="text-sm w-64 truncate font-bold text-gray-900">
-                {memoizedGame.name}
+                {name}
               </h3>
-              <p className="text-base font-bold text-gray-900">
-                $ {memoizedGame.price}
-              </p>
+              <p className="text-base font-bold text-gray-900">$ {price}</p>
             </div>
           </div>
           <button
