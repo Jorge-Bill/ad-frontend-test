@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { Game, Genre } from '@/types/game';
 import Card from './Card';
 import Skeleton from './Skeleton';
-import { useEffect, useTransition } from 'react';
+import { useEffect, useTransition, useCallback, useState } from 'react';
 import Banner from './Banner';
 import Divider from './Divider';
 import useInfiniteScroll from '@/hooks/UseInfinityScroll';
@@ -12,7 +11,7 @@ import FadeIn from './FadeIn';
 import { all, generateGenreOptions } from '@/utils/generic';
 import Select from './Select';
 import { getGames } from '@/services/api';
-import { startSessionStorage, saveInSession } from '@/services/session';
+import { saveInSession } from '@/services/session';
 import Notification from './Notification';
 
 export default function Products() {
@@ -27,50 +26,53 @@ export default function Products() {
   const [notification, setNotification] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
 
-  const loadMore = async (count: number) => {
-    if (isPending || isLoading) return;
+  const loadMore = useCallback(
+    async (count: number, category?: string) => {
+      if (isPending || isLoading) return;
 
-    try {
-      setIsLoading(true);
-      await getGames(count, selected.name)
-        .then(res => res.json())
-        .then(data => {
-          data.currentPage < data.totalPages
-            ? setHasMore(true)
-            : setHasMore(false);
-          setPage(data.currentPage);
+      try {
+        setIsLoading(true);
+        await getGames(count, category || selected.name)
+          .then(res => res.json())
+          .then(data => {
+            data.currentPage < data.totalPages
+              ? setHasMore(true)
+              : setHasMore(false);
+            setPage(data.currentPage);
 
-          if (count === 1) {
-            setOptions(generateGenreOptions(data.availableFilters));
-            setGames(data.games);
-          } else {
-            setGames([...games, ...data.games]);
-          }
-        })
-        .finally(() => setIsLoading(false));
-    } catch (error) {
-      setIsLoading(false);
-    }
-  };
+            if (count === 1) {
+              setOptions(generateGenreOptions(data.availableFilters));
+              setGames(data.games);
+            } else {
+              setGames([...games, ...data.games]);
+            }
+          })
+          .finally(() => setIsLoading(false));
+      } catch (error) {
+        setIsLoading(false);
+      }
+    },
+    [games, isPending, isLoading, selected]
+  );
 
   useEffect(() => {
     startTransition(() => {
       loadMore(page);
-      startSessionStorage();
     });
+    // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    startTransition(() => {
-      loadMore(1);
-    });
-  }, [selected]);
-
   const onLoad = () => {
-    hasMore &&
-      startTransition(() => {
-        loadMore(page + 1);
-      });
+    startTransition(() => {
+      hasMore && games.length > 0 && loadMore(page + 1);
+    });
+  };
+
+  const handleSelect = (value: Genre) => {
+    startTransition(() => {
+      setSelected(value);
+      loadMore(1, value.name);
+    });
   };
 
   useInfiniteScroll(onLoad, isPending || isLoading);
@@ -101,7 +103,7 @@ export default function Products() {
       <Banner title="Top Sellers">
         <Select
           options={options}
-          onChange={setSelected}
+          onChange={handleSelect}
           label="Genre"
           selected={selected}
         />

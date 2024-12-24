@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ClientInit from '@/components/ClientInit';
 
 import { AppConfig } from '@/config/AppConfig';
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang={AppConfig.locale}>
       <body className={inter.className}>
+        <ClientInit />
         <main className="mx-auto bg-white">
           <Header />
           {children}
