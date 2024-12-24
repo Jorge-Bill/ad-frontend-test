@@ -112,6 +112,7 @@ export default function Products() {
           {games.map(item => (
             <FadeIn key={item.id} delay={0.1}>
               <Card
+                type={'card'}
                 game={item}
                 onClick={() =>
                   cart.filter(game => game.id === item.id).length > 0
