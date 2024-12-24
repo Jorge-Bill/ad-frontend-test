@@ -1,6 +1,6 @@
 import { APP_VERSION, VERSION } from '@/config/constants';
 
-const saveInSession = (key: string, value: any) =>
+const saveInSession = (key: string, value: string) =>
   localStorage.setItem(key, value);
 
 const getFromSession = (key: string) => localStorage.getItem(key);

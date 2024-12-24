@@ -5,9 +5,10 @@ import Image from 'next/image';
 type CardProps = {
   game: Game;
   onClick?: () => void;
+  isInCart: boolean;
 };
 
-export default function Card({ game, onClick }: CardProps) {
+export default function Card({ game, onClick, isInCart }: CardProps) {
   const memoizedGame = useMemo(() => game, [game]);
   const { isNew, genre, image, name, price } = memoizedGame;
   return (
@@ -40,7 +41,7 @@ export default function Card({ game, onClick }: CardProps) {
             onClick={onClick}
             className="rounded border border-gray-500 py-4 uppercase hover:bg-gray-200"
           >
-            Add to cart
+            {isInCart ? 'Remove from' : 'Add to'} cart
           </button>
         </div>
       </div>
