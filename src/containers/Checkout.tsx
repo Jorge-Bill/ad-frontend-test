@@ -1,14 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Game } from '@/types/game';
 import Link from 'next/link';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { getFromSession } from '@/services/session';
-import Card from './Card';
-import Notification from './Notification';
-import Order from './Order';
-import FadeIn from './FadeIn';
+import Card from '@/components/Card';
+import Notification from '@/components/Notification';
+import Order from '@/components/Order';
+import FadeIn from '@/components/FadeIn';
 import { useCart } from '@/hooks/UseCart';
 
 export default function Checkout() {

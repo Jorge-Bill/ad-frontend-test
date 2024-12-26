@@ -1,17 +1,17 @@
 'use client';
 
 import { Game, Genre } from '@/types/game';
-import Card from './Card';
-import Skeleton from './Skeleton';
+import Card from '@/components/Card';
+import Skeleton from '@/components/Skeleton';
 import { useEffect, useTransition, useCallback, useState } from 'react';
-import Banner from './Banner';
-import Divider from './Divider';
+import Banner from '@/components/Banner';
+import Divider from '@/components/Divider';
 import useInfiniteScroll from '@/hooks/UseInfinityScroll';
-import FadeIn from './FadeIn';
+import FadeIn from '@/components/FadeIn';
 import { all, generateGenreOptions } from '@/utils/generic';
-import Select from './Select';
+import Select from '@/components/Select';
 import { getGames } from '@/services/api';
-import Notification from './Notification';
+import Notification from '@/components/Notification';
 import { useCart } from '@/hooks/UseCart';
 
 export default function Products() {

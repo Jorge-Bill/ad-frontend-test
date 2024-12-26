@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import Products from '@/components/Products';
+import Products from '@/containers/Products';
 import Skeleton from '@/components/Skeleton';
 
 export default async function Home() {
