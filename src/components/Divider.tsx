@@ -14,7 +14,7 @@ const Divider = ({
   return (
     <div className="relative">
       <div aria-hidden="true" className="absolute inset-0 flex items-center">
-        <div className={`${width} border-t ${borderColor}`} />
+        <div className={`${width} border-t ${borderColor}`} role='separator' aria-hidden="true" />
       </div>
     </div>
   );
