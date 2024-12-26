@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import Skeleton from '@/components/Skeleton';
-import Checkout from '@/containers/Checkout';
+import Checkout from '@/components/Checkout';
 export default async function Cart() {
   return (
     <>
