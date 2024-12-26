@@ -31,7 +31,7 @@ export default function Select({
       </Label>
       |
       <div className="relative mt-2">
-        <ListboxButton className="sm:text-sm/6 grid cursor-default grid-cols-1 rounded bg-white py-1.5 pl-3 pr-2 text-left text-gray-900 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:w-full lg:min-w-44">
+        <ListboxButton className="sm:text-sm/6 grid min-w-48 cursor-default grid-cols-1 rounded bg-white py-1.5 pl-3 pr-2 text-left text-gray-900 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:w-full lg:min-w-44">
           <span className="col-start-1 row-start-1 pr-6">{selected.name}</span>
           <ChevronDownIcon
             aria-hidden="true"
