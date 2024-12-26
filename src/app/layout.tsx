@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ClientInit from '@/components/ClientInit';
+import { CartProvider } from '@/context/CartContext';
 
 import { AppConfig } from '@/config/AppConfig';
 
@@ -27,7 +28,7 @@ export default function RootLayout({
         <ClientInit />
         <main className="mx-auto bg-white">
           <Header />
-          {children}
+          <CartProvider>{children}</CartProvider>
           <Footer />
         </main>
       </body>

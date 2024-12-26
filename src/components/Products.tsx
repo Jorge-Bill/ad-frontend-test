@@ -11,8 +11,8 @@ import FadeIn from './FadeIn';
 import { all, generateGenreOptions } from '@/utils/generic';
 import Select from './Select';
 import { getGames } from '@/services/api';
-import { saveInSession } from '@/services/session';
 import Notification from './Notification';
+import { useCart } from '@/hooks/UseCart';
 
 export default function Products() {
   const [isPending, startTransition] = useTransition();
@@ -22,9 +22,15 @@ export default function Products() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [options, setOptions] = useState<Genre[]>([]);
   const [selected, setSelected] = useState<Genre>(all);
-  const [cart, setCart] = useState<Game[]>([]);
-  const [notification, setNotification] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
+
+  const {
+    addToCart,
+    removeFromCart,
+    cart,
+    notification,
+    message,
+    setNotification,
+  } = useCart();
 
   const loadMore = useCallback(
     async (count: number, category?: string) => {
@@ -76,27 +82,6 @@ export default function Products() {
   };
 
   useInfiniteScroll(onLoad, isPending || isLoading);
-
-  const addToCart = (game: Game) => {
-    if (cart.filter(stored => stored.id === game.id).length > 0) {
-      setMessage(`Already added ${game.name} to cart.`);
-      setNotification(true);
-      return;
-    }
-    setCart(cart => [...cart, game]);
-    setMessage(`Added ${game.name} to cart.`);
-    setNotification(true);
-  };
-
-  const removeFromCart = (game: Game) => {
-    setCart(cart => [...cart.filter(stored => stored.id !== game.id)]);
-    setMessage(`Removed ${game.name} from cart.`);
-    setNotification(true);
-  };
-
-  useEffect(() => {
-    saveInSession('cart', JSON.stringify(cart));
-  }, [cart]);
 
   return (
     <>

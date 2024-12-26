@@ -9,24 +9,11 @@ import Card from './Card';
 import Notification from './Notification';
 import Order from './Order';
 import FadeIn from './FadeIn';
+import { useCart } from '@/hooks/UseCart';
 
 export default function Checkout() {
-  const [cart, setCart] = useState<Game[]>([]);
-  const [notification, setNotification] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
-
-  useEffect(() => {
-    const stored = getFromSession('cart');
-    if (stored) {
-      setCart(JSON.parse(stored));
-    }
-  }, []);
-
-  const removeFromCart = (game: Game) => {
-    setCart(cart => [...cart.filter(stored => stored.id !== game.id)]);
-    setMessage(`Removed ${game.name} from cart.`);
-    setNotification(true);
-  };
+  const { cart, notification, setNotification, message, removeFromCart } =
+    useCart();
 
   return (
     <div className="mx-auto h-full min-h-screen max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
